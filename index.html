@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZENenergy</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #111111;
+      --accent: #FF2D55;
+      --light: #F5F5F7;
+      --text: #1D1D1F;
+      --text-light: #86868B;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+    
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(245, 245, 247, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+    }
+    
+    .logo span {
+      color: var(--accent);
+    }
+    
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: var(--accent);
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #f5f5f7 0%, #e5e5e7 100%);
+      z-index: -1;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+    }
+    
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-light);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 2rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+    
+    .btn:hover {
+      background: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-accent {
+      background: var(--accent);
+      margin-left: 1rem;
+    }
+    
+    .btn-accent:hover {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    
+    section {
+      padding: 8rem 0;
+      position: relative;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .mission-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .mission-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .mission-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mission-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .mission-card p {
+      color: var(--text-light);
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+    
+    .product-image {
+      height: 200px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    
+    .product-info {
+      padding: 1.5rem;
+    }
+    
+    .product-info h3 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .product-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+    
+    .bot-section {
+      background: var(--primary);
+      color: white;
+      border-radius: 24px;
+      padding: 4rem;
+      text-align: center;
+    }
+    
+    .bot-section h2 {
+      color: white;
+    }
+    
+    .bot-section p {
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .contact-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .contact-card h3 {
+      margin-bottom: 1rem;
+    }
+    
+    .contact-card p {
+      color: var(--text-light);
+    }
+    
+    .contact-card a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .contact-card a:hover {
+      opacity: 0.8;
+    }
+    
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+    
+    footer p {
+      opacity: 0.7;
+    }
+    
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      
+      .hero {
+        text-align: center;
+      }
+      
+      .hero-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .btn-accent {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ZEN<span>energy</span></div>
+    <nav>
+      <a href="#home">Головна</a>
+      <a href="#mission">Місія</a>
+      <a href="#products">Продукти</a>
+      <a href="#bot">Бот</a>
+      <a href="#contact">Контакти</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+          <h1>Нова ера спорту — <span style="color: var(--accent)">Sport 2.0</span></h1>
+          <p>Поєднання фізичної активності, ментального здоров'я та сучасних технологій для досягнення гармонії тіла та розуму.</p>
+          <div class="hero-btns">
+            <a href="#products" class="btn">Дізнатися більше</a>
+            <a href="#bot" class="btn btn-accent">Спробувати бота</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2>Наша філософія</h2>
+          <p class="section-subtitle">Ми створюємо екосистему, де спорт стає не просто тренуванням, а способом життя</p>
+        </div>
+        <div class="mission-cards">
+          <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+            <h3>Баланс</h3>
+            <p>Поєднуємо фізичні тренування з практиками ментального здоров'я для досягнення гармонії.</p>
+          </div>
+          <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
+            <h3>Технології</h3>
+            <p>Використовуємо сучасні рішення для персоналізації вашого спортивного досвіду.</p>
+          </div>
+          <div class="mission-card" data-aos="fade-up" data-aos-delay="300">
+            <h3>Спільнота</h3>
+            <p>Об'єднуємо однодумців, які прагнуть розвитку та самовдосконалення.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2>Наші продукти</h2>
+          <p class="section-subtitle">Все, що потрібно для вашого спортивного та ментального розвитку</p>
+        </div>
+        <div class="products-grid">
+          <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="product-image">🛍️</div>
+            <div class="product-info">
+              <h3>Спортивні товари</h3>
+              <p>Високоякісне спортивне обладнання та аксесуари для тренувань вдома та на вулиці.</p>
+            </div>
+          </div>
+          <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="product-image">📚</div>
+            <div class="product-info">
+              <h3>Освітні курси</h3>
+              <p>Мікро-курси з фітнесу, харчування та ментального здоров'я від провідних експертів.</p>
+            </div>
+          </div>
+          <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="product-image">🤖</div>
+            <div class="product-info">
+              <h3>Персональний бот</h3>
+              <p>Інтелектуальний помічник, який створить індивідуальну програму тренувань та відновлення.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bot">
+      <div class="container">
+        <div class="bot-section" data-aos="fade-up">
+          <h2>ZENenergy Бот</h2>
+          <p>Ваш персональний тренер у смартфоні. Отримуйте індивідуальні тренування, мотивацію та поради щодня.</p>
+          <a  target="_blank" class="btn btn-accent">В розробці</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2>Зв'яжіться з нами</h2>
+          <p class="section-subtitle">Ми завжди раді новим ідеям та співпраці</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+            <h3>Електронна пошта</h3>
+            <p><a href="mailto:zenenergy.official.company@gmail.com">zenenergy.official.company@gmail.com</a></p>
+          </div>
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+            <h3>Соціальні мережі</h3>
+            <p><a href="https://instagram.com/zenenergy.official" target="_blank">Instagram @zenenergy.official</a></p>
+          </div>
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+            <h3>Telegram</h3>
+            <p><a  target="_blank">В розробці</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 ZENenergy. Всі права захищені.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out'
+    });
+  </script>
+</body>
+</html>

@@ -40,6 +40,7 @@
       padding: 0 5vw;
     }
     
+    
     header {
       position: fixed;
       top: 0;
@@ -66,6 +67,7 @@
       color: var(--accent);
     }
     
+    /* Основне меню */
     nav {
       display: flex;
       gap: 2rem;
@@ -97,6 +99,86 @@
     
     nav a:hover::after {
       width: 100%;
+    }
+    
+    /* Burger меню */
+    .burger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+      z-index: 101;
+    }
+    
+    .burger-line {
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .burger-menu.active .burger-line:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    
+    .burger-menu.active .burger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .burger-menu.active .burger-line:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    /* Мобільне меню */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: var(--light);
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      padding: 80px 30px 30px;
+      transition: right 0.3s ease;
+      z-index: 99;
+    }
+    
+    .mobile-nav.active {
+      right: 0;
+    }
+    
+    .mobile-nav a {
+      display: block;
+      padding: 15px 0;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .mobile-nav a:hover {
+      color: var(--accent);
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 98;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
     
     .hero {
@@ -327,6 +409,10 @@
         display: none;
       }
       
+      .burger-menu {
+        display: flex;
+      }
+      
       .hero {
         text-align: center;
       }
@@ -340,20 +426,48 @@
       .btn-accent {
         margin-left: 0;
       }
+
+      .bot-section {
+        padding: 2rem;
+      }
     }
   </style>
 </head>
 <body>
+
+
   <header>
     <div class="logo">ZEN<span>energy</span></div>
-    <nav>
+    
+    <!-- Основне меню для десктопу -->
+    <nav class="desktop-nav">
       <a href="#home">Головна</a>
+      <a href="quiz.html">ZEN-quiz</a>
       <a href="#mission">Місія</a>
       <a href="#products">Продукти</a>
       <a href="#bot">Бот</a>
       <a href="#contact">Контакти</a>
     </nav>
+    
+    <!-- Burger іконка для мобільних -->
+    <div class="burger-menu" id="burgerMenu">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
   </header>
+
+  <!-- Мобільне меню -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#home">Головна</a>
+    <a href="#mission">Місія</a>
+    <a href="#products">Продукти</a>
+    <a href="#bot">Бот</a>
+    <a href="#contact">Контакти</a>
+  </div>
+  
+  <!-- Оверлей для мобільного меню -->
+  <div class="overlay" id="overlay"></div>
 
   <main>
     <section id="home" class="hero">
@@ -370,6 +484,7 @@
       </div>
     </section>
 
+    <!-- Інші секції залишаються без змін -->
     <section id="mission">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -430,7 +545,7 @@
         <div class="bot-section" data-aos="fade-up">
           <h2>ZENenergy Бот</h2>
           <p>Ваш персональний тренер у смартфоні. Отримуйте індивідуальні тренування, мотивацію та поради щодня.</p>
-          <a  target="_blank" class="btn btn-accent">В розробці</a>
+          <a href="https://t.me/zenenergy_bot" target="_blank" class="btn btn-accent">Спробувати бота</a>
         </div>
       </div>
     </section>
@@ -444,15 +559,15 @@
         <div class="contact-grid">
           <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
             <h3>Електронна пошта</h3>
-            <p><a href="mailto:zenenergy.official.company@gmail.com">zenenergy.official.company@gmail.com</a></p>
+            <p><a href="mailto:zenenergy.team@gmail.com">zenenergy.team@gmail.com</a></p>
           </div>
           <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
             <h3>Соціальні мережі</h3>
-            <p><a href="https://instagram.com/zenenergy.official" target="_blank">Instagram @zenenergy.official</a></p>
+            <p><a href="https://instagram.com/zenenergy" target="_blank">Instagram @zenenergy</a></p>
           </div>
           <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
             <h3>Telegram</h3>
-            <p><a  target="_blank">В розробці</a></p>
+            <p><a href="https://t.me/zenenergy_bot" target="_blank">@zenenergy_bot</a></p>
           </div>
         </div>
       </div>
@@ -467,10 +582,45 @@
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
+    // Ініціалізація анімацій
     AOS.init({
       duration: 800,
       once: true,
       easing: 'ease-in-out'
+    });
+
+      
+      
+
+
+    // Burger menu функціонал
+    const burgerMenu = document.getElementById('burgerMenu');
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('overlay');
+    
+    burgerMenu.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    overlay.addEventListener('click', function() {
+      burgerMenu.classList.remove('active');
+      mobileNav.classList.remove('active');
+      this.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Закрити меню при кліку на посилання
+    const navLinks = document.querySelectorAll('.mobile-nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        burgerMenu.classList.remove('active');
+        mobileNav.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
     });
   </script>
 </body>
